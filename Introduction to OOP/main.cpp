@@ -2,6 +2,9 @@
 
 //#define STRUCT_PINT
 
+//Point G; //Global object
+int g; //Gloval variable - very bad! DEPRICATED ( осуждается, не одобряется)
+
 #define tab "\t"
 
 /*
@@ -18,7 +21,7 @@ class Point {
 	double x;
 	double y;
 public:
-
+	//в public сначала пишем гет-сет ( реализуем то есть инкапсуляцию
 	double get_x() const {
 		return x;
 	}
@@ -33,6 +36,49 @@ public:
 
 	void set_y(double y) {
 		this->y = y;
+	}
+
+	//Constructor
+
+	Point() {
+
+		x = y = 0;
+		std::cout << "defaultConstructor:\t" << this << std::endl;
+
+	}
+
+	//Constructor
+
+	Point(double x) {
+
+		this->x = x;
+		this->y = 0;
+		std::cout << "1arg Constructor:\t" << this << std::endl;
+
+	}
+
+	//Constructor
+
+	Point(double x, double y) {
+
+		this->x = x;
+		this->y = y;
+		std::cout << "Constructor:\t" << this << std::endl;
+
+	}
+
+	//Destructor
+
+	~Point() {
+		std::cout << "Destructor:\t" << this << std::endl;
+	
+	}
+
+    //Methods
+
+	void print() const {
+
+		std::cout << "X= " << x << "\tY= " << y << std::endl;
 	}
 
 };
@@ -55,13 +101,28 @@ int main() {
 	std::cout << pA->x << tab << pA->y << std::endl;
 #endif //STRUCT_POINT
 
-	Point A;
-	A.set_x(2);
-	A.set_y(3);
+	Point A; //default constructor
+//	A.set_x(2);
+//	A.set_y(3);
 
 
-	std::cout << A.get_x() << tab << A.get_y() << std::endl;
+	//std::cout << A.get_x() << tab << A.get_y() << std::endl;
 
+	A.print();
+
+	Point B(4, 5);
+	B.print();
+
+	//Point C(5);
+	Point C = 5; //можно и так если конструктор с 1 параметром есть
+	C.print();
+
+	/*
+	for (int i = 0; i < 10; ++i) {
+		std::cout << i << std::endl;
+	}
+	*/
+	//std::cout << i << std::endl;
 
 	return 0;
 }
