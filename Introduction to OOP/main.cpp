@@ -1,27 +1,13 @@
 #include <iostream>
+//#include <math.h>
 
-//#define STRUCT_PINT
-
-//Point G; //Global object
-int g; //Gloval variable - very bad! DEPRICATED ( осуждаетс€, не одобр€етс€)
-
-#define tab "\t"
-
-/*
-
-struct Point {
-	double x;
-	double y;
-};
-
-*/
 
 class Point {
 
 	double x;
 	double y;
 public:
-	//в public сначала пишем гет-сет ( реализуем то есть инкапсул€цию
+	//в public сначала пишем гет-сет ( реализуем то есть инкапсул€цию )
 	double get_x() const {
 		return x;
 	}
@@ -81,48 +67,46 @@ public:
 		std::cout << "X= " << x << "\tY= " << y << std::endl;
 	}
 
+	double distance(double x, double y) {
+
+		return sqrt(pow((this->x) - x, 2) + pow((this->y) - y, 2));
+
+	}
+
 };
 
+
+double distance(double x1, double y1, double x2, double y2);
 
 
 int main() {
 
-#ifdef STRUCT_POINT
-	//type name; объ€вление переменной ј типа структуры/класса Point
-	//или объ€вление объекта типа Point ( структуры Point), или же создание экземпл€ра ј структуры Point 
-	Point A;
-	A.x = 2;
-	A.y = 3;
-
-	std::cout << A.x<<tab<<A.y<<std::endl;
-
-	Point* pA = &A; //объ€вл€ем указатель на Point 'pA', и инициализируем его адресом объекта 'A'
-
-	std::cout << pA->x << tab << pA->y << std::endl;
-#endif //STRUCT_POINT
-
-	Point A; //default constructor
-//	A.set_x(2);
-//	A.set_y(3);
+	double x1 = double();
+	double y1 = double();
+	double x2 = double();
+	double y2 = double();
 
 
-	//std::cout << A.get_x() << tab << A.get_y() << std::endl;
-
+	Point A(2,2); 
 	A.print();
 
-	Point B(4, 5);
+	Point B(4, 4);
 	B.print();
 
-	//Point C(5);
-	Point C = 5; //можно и так если конструктор с 1 параметром есть
-	C.print();
+	std::cout << "Enter X and Y coordinates of point 1: "; std::cin >> x1 >> y1;
+	std::cout << " Distance from point 1 to A is: " << A.distance(x1, y1) << "\n";
+	std::cout << " Distance from point 1 to B is: " << B.distance(x1, y1) << "\n";
+	std::cout << "Enter X and Y coordinates of point 2: "; std::cin >> x2 >> y2;
+	std::cout << " Distance from point 2 to A is: " << A.distance(x2, y2) << "\n";
+	std::cout << " Distance from point 2 to B is: " << B.distance(x2, y2) << "\n";
+	std::cout << " Distance between point 1 and point 2 is: " << distance(x1,y1,x2, y2) << "\n";
 
-	/*
-	for (int i = 0; i < 10; ++i) {
-		std::cout << i << std::endl;
-	}
-	*/
-	//std::cout << i << std::endl;
 
 	return 0;
+}
+
+double distance(double x1, double y1, double x2, double y2) {
+
+	return sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
+
 }
