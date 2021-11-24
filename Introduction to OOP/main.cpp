@@ -96,6 +96,7 @@ int main() {
 	std::cout << " Distance from point B to A is: " << B.distance(A) << "\n";
 
 	std::cout << " Distance between point A and point B is: " << distance(A,B) << "\n";
+	std::cout << " Distance between point B and point A is: " << distance(B, A) << "\n";
 
 
 	return 0;
