@@ -67,11 +67,30 @@ public:
 
 	}
 
+	Point(const Point& other) {
+
+		this->x = other.x;
+		this->y = other.y;
+		std::cout << "CopyConstructor" << this << std::endl;
+
+	}
+
+
+
 	//Destructor
 
 	~Point() {
 		std::cout << "Destructor:\t" << this << std::endl;
 	
+	}
+
+	//   Operators
+
+	void operator = (const Point& other) {
+
+		this->x = other.x;
+		this->y = other.y;
+		std::cout << "CopyAssignment:\t" << this << std::endl;
 	}
 
     //Methods
@@ -102,12 +121,6 @@ int main() {
 #endif //STRUCT_POINT
 
 	Point A; //default constructor
-//	A.set_x(2);
-//	A.set_y(3);
-
-
-	//std::cout << A.get_x() << tab << A.get_y() << std::endl;
-
 	A.print();
 
 	Point B(4, 5);
@@ -117,12 +130,26 @@ int main() {
 	Point C = 5; //можно и так если конструктор с 1 параметром есть
 	C.print();
 
+	Point D(5);
+	D.print();
+
 	/*
 	for (int i = 0; i < 10; ++i) {
 		std::cout << i << std::endl;
 	}
 	*/
 	//std::cout << i << std::endl;
+
+	Point E = D; //CopyConstructor
+	E.print();
+
+	Point F(B); //CopyConstructor
+	F.print();
+
+	Point G;
+	G = F; //CopyAssignment (operator =)
+	G.print();
+
 
 	return 0;
 }
