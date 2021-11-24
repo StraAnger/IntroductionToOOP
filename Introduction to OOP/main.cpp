@@ -66,25 +66,25 @@ public:
 		std::cout << "X= " << x << "\tY= " << y << std::endl;
 	}
 
-	double distance(double x, double y) {
+	   double distance(Point other) {
+		
+		//other- другой - просто имя переменной для удобства
 
-		return sqrt(pow((this->x) - x, 2) + pow((this->y) - y, 2));
+		double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance* x_distance+ y_distance* y_distance);
+
+		return distance;
 
 	}
 
 };
 
 
-double distance(double x1, double y1, double x2, double y2);
+double distance(Point A, Point B); 
 
 
 int main() {
-
-	double x1 = double();
-	double y1 = double();
-	double x2 = double();
-	double y2 = double();
-
 
 	Point A(2,2); 
 	A.print();
@@ -92,20 +92,19 @@ int main() {
 	Point B(4, 4);
 	B.print();
 
-	std::cout << "Enter X and Y coordinates of point 1: "; std::cin >> x1 >> y1;
-	std::cout << " Distance from point 1 to A is: " << A.distance(x1, y1) << "\n";
-	std::cout << " Distance from point 1 to B is: " << B.distance(x1, y1) << "\n";
-	std::cout << "Enter X and Y coordinates of point 2: "; std::cin >> x2 >> y2;
-	std::cout << " Distance from point 2 to A is: " << A.distance(x2, y2) << "\n";
-	std::cout << " Distance from point 2 to B is: " << B.distance(x2, y2) << "\n";
-	std::cout << " Distance between point 1 and point 2 is: " << distance(x1,y1,x2, y2) << "\n";
+	std::cout << " Distance from point A to B is: " << A.distance(B) << "\n";
+	std::cout << " Distance from point B to A is: " << B.distance(A) << "\n";
+
+	std::cout << " Distance between point A and point B is: " << distance(A,B) << "\n";
 
 
 	return 0;
 }
 
-double distance(double x1, double y1, double x2, double y2) {
+double distance(Point A, Point B) {
 
-	return sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
+	double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	return sqrt(x_distance * x_distance + y_distance * y_distance);
 
 }
