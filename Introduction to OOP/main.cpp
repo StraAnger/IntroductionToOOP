@@ -49,8 +49,17 @@ public:
 		this->x = x;
 		this->y = y;
 		std::cout << "Constructor:\t" << this << std::endl;
-
+		
 	}
+
+	Point operator=(const Point& other) {
+
+		this->x = other.x;
+		this -> y = other.y;
+		std::cout << "CopyAssignment:\t" << this << std::endl;
+		return *this;
+	}
+
 
 	//Destructor
 
@@ -85,7 +94,7 @@ double distance(const Point& A,const Point& B);
 
 
 int main() {
-
+/*
 	Point A(2,2); 
 	A.print();
 
@@ -100,8 +109,7 @@ int main() {
 	std::cout << "\n--------------------------------------------" << std::endl;
 	std::cout << " Distance between point B and point A is: " << distance(B, A) << "\n";
 	std::cout << "\n--------------------------------------------" << std::endl;
-
-	/*
+	*/
 
 	int a, b, c;
 	a = b = c = 0;
@@ -113,7 +121,7 @@ int main() {
 	A.print();
 	B.print();
 	C.print();
-	*/
+
 
 	return 0;
 }
