@@ -52,12 +52,27 @@ public:
 		
 	}
 
-	Point operator=(const Point& other) {
+	Point& operator = (const Point& other) {
 
 		this->x = other.x;
 		this -> y = other.y;
 		std::cout << "CopyAssignment:\t" << this << std::endl;
 		return *this;
+	}
+
+	Point& operator ++ () { //preffix increment
+
+		this->x++;
+		this->y++;
+		return *this; //Возвращается изменённое значение
+	}
+
+	Point& operator ++ (int) { //postfix increment
+
+		Point old = *this; //сохраняем старое значение объекта
+		x++;
+		y++;
+		return old; //возвращаем старое значение ( не изменённое)
 	}
 
 
@@ -92,6 +107,13 @@ public:
 
 double distance(const Point& A,const Point& B); 
 
+Point& operator + (const Point& left, const Point& right) {
+
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+	return result;
+}
 
 int main() {
 /*
@@ -110,18 +132,31 @@ int main() {
 	std::cout << " Distance between point B and point A is: " << distance(B, A) << "\n";
 	std::cout << "\n--------------------------------------------" << std::endl;
 	*/
-
+	/*
 	int a, b, c;
 	a = b = c = 0;
 	std::cout << a << "\t" << b << "\t" << c << std::endl;
 
 	Point A, B, C;
-
+	std::cout << "\n--------------------------------------------" << std::endl;
 	A=B=C= Point(2, 3);
+	//Point(2,3); - явно вызываем конструктор, который создаёт временный безымянный объект.
+	std::cout << "\n--------------------------------------------" << std::endl;
 	A.print();
 	B.print();
 	C.print();
+	*/
+	int a = 2;
+	int b = 3;
+	int c = a + b;
 
+
+	Point A(2, 3);
+	Point B(4, 5);
+	Point C = A + B;
+	C.print();
+	C++;
+	++C;
 
 	return 0;
 }
