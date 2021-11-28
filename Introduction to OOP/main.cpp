@@ -66,7 +66,7 @@ public:
 		std::cout << "X= " << x << "\tY= " << y << std::endl;
 	}
 
-	   double distance(Point other) {
+	double distance(const Point& other) const {
 		
 		//other- другой - просто имя переменной для удобства
 
@@ -81,7 +81,7 @@ public:
 };
 
 
-double distance(Point A, Point B); 
+double distance(const Point& A,const Point& B); 
 
 
 int main() {
@@ -91,18 +91,34 @@ int main() {
 
 	Point B(4, 4);
 	B.print();
-
+	std::cout << "\n--------------------------------------------" << std::endl;
 	std::cout << " Distance from point A to B is: " << A.distance(B) << "\n";
+	std::cout << "\n--------------------------------------------" << std::endl;
 	std::cout << " Distance from point B to A is: " << B.distance(A) << "\n";
-
+	std::cout << "\n--------------------------------------------" << std::endl;
 	std::cout << " Distance between point A and point B is: " << distance(A,B) << "\n";
+	std::cout << "\n--------------------------------------------" << std::endl;
 	std::cout << " Distance between point B and point A is: " << distance(B, A) << "\n";
+	std::cout << "\n--------------------------------------------" << std::endl;
 
+	/*
+
+	int a, b, c;
+	a = b = c = 0;
+	std::cout << a << "\t" << b << "\t" << c << std::endl;
+
+	Point A, B, C;
+
+	A=B=C= Point(2, 3);
+	A.print();
+	B.print();
+	C.print();
+	*/
 
 	return 0;
 }
 
-double distance(Point A, Point B) {
+double distance(Point& A, Point& B) {
 
 	double x_distance = A.get_x() - B.get_x();
 	double y_distance = A.get_y() - B.get_y();
@@ -110,3 +126,4 @@ double distance(Point A, Point B) {
 
 	return 0;
 }
+
