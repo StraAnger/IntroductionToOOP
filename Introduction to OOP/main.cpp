@@ -108,4 +108,5 @@ double distance(Point A, Point B) {
 	double y_distance = A.get_y() - B.get_y();
 	return sqrt(x_distance * x_distance + y_distance * y_distance);
 
+	return 0;
 }
