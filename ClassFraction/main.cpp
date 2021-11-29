@@ -88,11 +88,16 @@ public:
 int main() {
 
 
-
-
-
-
-
+	Fraction A; //Default constructor
+	A.print();
+	double b = 5;
+	Fraction B = 5; //Single-argument constructor
+	B.print();
+/*	Fraction C(7); //Single-argument constructor можно любым из 3х способов
+	C.print();
+	Fraction D{ 8 }; //Single-argument constructor
+	D.print();
+*/
 
 	return 0;
 }
