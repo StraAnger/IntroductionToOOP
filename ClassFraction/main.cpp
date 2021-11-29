@@ -38,7 +38,32 @@ public:
 		this->denominator=denominator;
 	}
 
-	// Constructor
+	// Constructors
+
+	Fraction()
+	{
+		this->integer = 0;
+		this->numerator = 0;
+		this->denominator = 1;
+		std::cout << "Default constructor:\t" << this << std::endl;
+	}
+
+	Fraction(int integer)
+	{
+		this->integer = integer;
+		this->numerator = 0;
+		this->denominator = 1;
+		std::cout << "1arg Constructor:\t" << this << std::endl;
+	}
+
+	Fraction(int numerator, int denominator)
+	{
+		this->integer = 0;
+		this->numerator = numerator;
+		set_denominator(denominator); //защита от записи 0 и фильтрация данных
+		std::cout << "2arg Constructor:\t" << this << std::endl;
+	}
+
 
 	Fraction(int integer = 0, int numerator = 0, int denominator = 1)
 	{
@@ -60,7 +85,7 @@ public:
 	void print()
 	{
 		if (integer) {//Если есть целая часть, выводим её на экран
-			std::cout << integer << std::endl;
+			std::cout << integer;
 		}
 		if (numerator) {
 			if (integer) {
@@ -98,6 +123,11 @@ int main() {
 	Fraction D{ 8 }; //Single-argument constructor
 	D.print();
 */
+	Fraction C(3, 4);
+	C.print();
+	Fraction D(2,3, 4);
+	D.print();
+
 
 	return 0;
 }
