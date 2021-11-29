@@ -65,12 +65,12 @@ public:
 	}
 
 
-	Fraction(int integer = 0, int numerator = 0, int denominator = 1)
+	Fraction(int integer, int numerator, int denominator)
 	{
 		this->integer = integer;
 		this->numerator = numerator;
-		this->denominator = denominator;
-		std::cout << "Constructor:\t" << this << std::endl;
+		set_denominator(denominator); //защита от записи 0 и фильтрация данных
+		std::cout << "3arg Constructor:\t" << this << std::endl;
 	}
 
 	//Destructor
@@ -108,11 +108,11 @@ public:
 
 };
 
-
+//#define CONSTRUCTORS_CHECK
 
 int main() {
 
-
+#ifdef CONSTRUCTORS_CHECK
 	Fraction A; //Default constructor
 	A.print();
 	double b = 5;
@@ -127,6 +127,22 @@ int main() {
 	C.print();
 	Fraction D(2,3, 4);
 	D.print();
+#endif CONSTRUCTORS_CHECK
+
+	double a = 2.5;
+	double b = 3.4;
+	double c = a * b;
+
+	std::cout << c << std::endl;
+
+	Fraction A(2, 1, 2);
+	Fraction B(3, 2, 5);
+	Fraction C = A * B;
+	C.print();
+
+
+
+
 
 
 	return 0;
