@@ -5,6 +5,8 @@ class Fraction {
 
 	double x;
 	double y;
+	double z;
+	double result;
 
 public:
 	
@@ -18,6 +20,15 @@ public:
 		return y;
 	}
 
+	double get_z() const {
+		return z;
+	}
+
+
+	double get_result() const {
+		return result;
+	}
+
 	void set_x(double x) {
 		this->x = x;
 	}
@@ -26,62 +37,65 @@ public:
 		this->y = y;
 	}
 
+	void set_z(double z) {
+		this->z = z;
+	}
+
+	void set_result(double result) {
+		this->result = result;
+	}
 	//Constructor
 
 	Fraction() {
 
-		x = y = 0;
+		x = y = z = result = 1;
 		std::cout << "defaultConstructor:\t" << this << std::endl;
 
 	}
 
 	//Constructor
 
-	Point(double x) {
-
-		this->x = x;
-		this->y = 0;
-		std::cout << "1arg Constructor:\t" << this << std::endl;
-
-	}
-
-	//Constructor
-
-	Point(double x, double y) {
+	
+	Fraction(double x, double y) {
 
 		this->x = x;
 		this->y = y;
-		std::cout << "Constructor:\t" << this << std::endl;
+		this->result = this->x / this->y;
+		std::cout << "2arg Constructor:\t" << this << std::endl;
 
 	}
 
-	Point& operator = (const Point& other) {
+	Fraction(double x, double y, double z) {
+
+		this->x = x;
+		this->y = y;
+		this->z = z;
+		this->result = this->x / this->y/this->z;
+		std::cout << "3arg Constructor:\t" << this << std::endl;
+
+	}
+
+	Fraction& operator = (const Fraction& other) {
 
 		this->x = other.x;
 		this->y = other.y;
+		this->z = other.z;
+		this->result = other.result;
 		std::cout << "CopyAssignment:\t" << this << std::endl;
 		return *this;
 	}
 
-	Point& operator ++ () { //preffix increment
+	Fraction& operator = (const int& result) {
 
-		this->x++;
-		this->y++;
-		return *this; //Возвращается изменённое значение
+		this->result = result;
+		std::cout << "CopyAssignment:\t" << this << std::endl;
+		return *this;
 	}
 
-	Point& operator ++ (int) { //postfix increment
-
-		Point old = *this; //сохраняем старое значение объекта
-		x++;
-		y++;
-		return old; //возвращаем старое значение ( не изменённое)
-	}
-
-
+	
 	//Destructor
 
-	~Point() {
+	~Fraction() {
 		std::cout << "Destructor:\t" << this << std::endl;
 
 	}
@@ -90,28 +104,19 @@ public:
 
 	void print() const {
 
-		std::cout << "X= " << x << "\tY= " << y << std::endl;
+		std::cout << "Devision result is: " << result << std::endl;
 	}
-
-	double devision(const Fraction& other) const {
-
-		double x_distance = this->x - other.x;
-		double y_distance = this->y - other.y;
-		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
-
-		return this->y;
-
-	}
-
+			
 };
 
 
 Fraction& operator * (const Fraction& left, const Fraction& right) {
 
-	Point result;
-	result.set_x(left.get_x() + right.get_x());
-	result.set_y(left.get_y() + right.get_y());
-	return result;
+	Fraction res;
+	res.set_x(left.get_x() * right.get_x());
+	res.set_y(left.get_y() * right.get_y());
+	res.set_z(left.get_z() * right.get_z());
+	return res;
 }
 
 int main() {
@@ -123,7 +128,7 @@ int main() {
 	Fraction C(1, 2);
 	C.print();
 	Fraction D(2, 3, 4);
-	D.print()
+	D.print();
 	Fraction E = C * D;
 	E.print();
 
