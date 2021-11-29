@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Introduction to OOP", "Introduction to OOP\Introduction to OOP.vcxproj", "{A540CB99-A327-43BE-9E42-1BA6D44A1D20}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClassFraction", "ClassFraction\ClassFraction.vcxproj", "{E0F2DC1E-E413-4F27-AA05-9BE728924E01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{A540CB99-A327-43BE-9E42-1BA6D44A1D20}.Release|x64.Build.0 = Release|x64
 		{A540CB99-A327-43BE-9E42-1BA6D44A1D20}.Release|x86.ActiveCfg = Release|Win32
 		{A540CB99-A327-43BE-9E42-1BA6D44A1D20}.Release|x86.Build.0 = Release|Win32
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Debug|x64.ActiveCfg = Debug|x64
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Debug|x64.Build.0 = Debug|x64
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Debug|x86.ActiveCfg = Debug|Win32
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Debug|x86.Build.0 = Debug|Win32
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Release|x64.ActiveCfg = Release|x64
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Release|x64.Build.0 = Release|x64
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Release|x86.ActiveCfg = Release|Win32
+		{E0F2DC1E-E413-4F27-AA05-9BE728924E01}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
