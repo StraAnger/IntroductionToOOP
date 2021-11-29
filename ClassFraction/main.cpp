@@ -17,7 +17,7 @@ public:
 	{
 		return numerator;
 	}
-	int get_denumerator() const
+	int get_denominator() const
 	{
 		return denominator;
 	}
@@ -82,6 +82,20 @@ public:
 
 	//Methods
 
+	void to_improper() //переводит дробь в неправильную
+	{
+		numerator += integer * denominator;
+		integer = 0;	
+	}
+
+	void to_proper() //переводит дробь в правильную
+	{
+		integer += numerator / denominator;
+		numerator %= denominator;
+	}
+
+
+
 	void print()
 	{
 		if (integer) {//Если есть целая часть, выводим её на экран
@@ -102,11 +116,27 @@ public:
 		std::cout << std::endl;
 
 	}
-
-
-
-
 };
+
+
+Fraction operator * (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	Fraction result
+	(
+	left.get_numerator() * right.get_numerator(),
+	left.get_denominator() * right.get_denominator()
+	);
+// это сразу если в конструкторе, а можно и так как ниже:
+
+/*	result.set_numerator(left.get_numerator() * right.get_numerator());
+	result.set_denominator(left.get_denominator() * right.get_denominator());
+*/
+	return result;
+}
+
 
 //#define CONSTRUCTORS_CHECK
 
@@ -139,11 +169,6 @@ int main() {
 	Fraction B(3, 2, 5);
 	Fraction C = A * B;
 	C.print();
-
-
-
-
-
 
 	return 0;
 }
