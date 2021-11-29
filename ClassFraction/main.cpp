@@ -137,6 +137,8 @@ Fraction operator * (Fraction left, Fraction right)
 	return result;
 }
 
+//В классе Fraction написать метод reduce(), который сокращает простую дробь.
+
 
 //#define CONSTRUCTORS_CHECK
 
