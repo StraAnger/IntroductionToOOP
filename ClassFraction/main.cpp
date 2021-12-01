@@ -156,17 +156,23 @@ Fraction operator * (Fraction left, Fraction right)
 	left.to_improper();
 	right.to_improper();
 
-	Fraction result
+/*	Fraction result
 	(
 	left.get_numerator() * right.get_numerator(),
 	left.get_denominator() * right.get_denominator()
-	);
+	);*/
 // это сразу если в конструкторе, а можно и так как ниже:
 
 /*	result.set_numerator(left.get_numerator() * right.get_numerator());
 	result.set_denominator(left.get_denominator() * right.get_denominator());
 */
-	return result;
+//	return result;
+
+	return Fraction //явно вызываем конструктор, который создаЄт временный безым€нный объект
+	(
+		left.get_numerator() * right.get_numerator(),
+		left.get_denominator() * right.get_denominator()
+	);
 }
 
 
