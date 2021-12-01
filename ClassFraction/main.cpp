@@ -191,15 +191,7 @@ Fraction operator * (Fraction left, Fraction right)
 
 Fraction operator / (Fraction left, Fraction right)
 {
-	left.to_improper();
-	right.to_improper();
-
-	return Fraction //явно вызываем конструктор, который создаЄт временный безым€нный объект
-	(
-		left.get_numerator() * right.get_denominator(),
-		left.get_denominator() * right.get_numerator()
-	).to_proper().reduce();
-
+	return left * right.inverted();
 }
 
 
