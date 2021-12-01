@@ -1,6 +1,7 @@
 #include <iostream>
 
-
+class Fraction;
+Fraction operator * (Fraction left, Fraction right);//Объявляем функцию.
 
 class Fraction 
 {
@@ -79,6 +80,15 @@ public:
 	{
 		std::cout << "Destructor:\t" << this << std::endl;
 	}
+
+	//Operators
+
+	Fraction& operator *= (const Fraction& other)
+	{
+		return *this = *this * other;
+	}
+
+
 
 	//Methods
 
@@ -189,10 +199,12 @@ Fraction operator * (Fraction left, Fraction right)
 
 }
 
+
 Fraction operator / (Fraction left, Fraction right)
 {
 	return left * right.inverted();
 }
+
 
 
 //#define CONSTRUCTORS_CHECK
@@ -224,20 +236,23 @@ int main() {
 
 	Fraction A(2, 1, 2);
 	Fraction B(3, 2, 5);
-	Fraction C = A * B;
+	//Fraction C = A * B;
 	//Fraction D(0, 840, 3600);
-	C.print();
+	//C.print();
 	//std::cout << "Now reduce! " << std::endl;
 	//A.reduce();
 	//B.reduce();
-	C.reduce();
+	//C.reduce();
 	//D.reduce();
 	//A.print();
 	//B.print();
 	//C.print();
 	//D.print();
-	C = A / B;
-	C.print();
+	//C = A / B;
+	//C.print();
+
+	A *= B;
+	A.print();
 
 	return 0;
 }
