@@ -88,7 +88,7 @@ public:
 	{
 		if (!integer) {
 
-			for (int i = numerator + denominator; i >0 ; --i) {
+			for (int i = numerator + denominator; i > 0 ; --i) {
 
 				if (!(numerator % i) && !(denominator % i)) {
 				
@@ -101,7 +101,7 @@ public:
 		else {
 			to_improper();
 		
-			for (int i = numerator + denominator; i == 1; --i) {
+			for (int i = numerator + denominator; i > 0 ; --i) {
 
 				if (!(numerator % i) && !(denominator % i)) {
 
@@ -110,8 +110,8 @@ public:
 
 				}
 			}
-		
 		}
+		to_proper();
 	}
 
 	void to_improper() //переводит дробь в неправильную
@@ -200,14 +200,17 @@ int main() {
 	Fraction A(2, 1, 2);
 	Fraction B(3, 2, 5);
 	Fraction C = A * B;
+	//Fraction D(0, 840, 3600);
 	C.print();
-	std::cout << "Now reduce! " << std::endl;
-	A.reduce();
-	B.reduce();
+	//std::cout << "Now reduce! " << std::endl;
+	//A.reduce();
+	//B.reduce();
 	C.reduce();
-	A.print();
-	B.print();
-	C.print();
+	//D.reduce();
+	//A.print();
+	//B.print();
+	//C.print();
+	//D.print();
 
 	return 0;
 }
