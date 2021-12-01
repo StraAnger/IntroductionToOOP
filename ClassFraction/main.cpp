@@ -82,6 +82,38 @@ public:
 
 	//Methods
 
+	//В классе Fraction написать метод reduce(), который сокращает простую дробь.
+
+	void reduce() //сокращает простую дробь
+	{
+		if (!integer) {
+
+			for (int i = numerator + denominator; i >0 ; --i) {
+
+				if (!(numerator % i) && !(denominator % i)) {
+				
+					numerator /= i;
+					denominator /= i;
+				
+				}
+			}
+		}
+		else {
+			to_improper();
+		
+			for (int i = numerator + denominator; i == 1; --i) {
+
+				if (!(numerator % i) && !(denominator % i)) {
+
+					numerator /= i;
+					denominator /= i;
+
+				}
+			}
+		
+		}
+	}
+
 	void to_improper() //переводит дробь в неправильную
 	{
 		numerator += integer * denominator;
@@ -137,8 +169,6 @@ Fraction operator * (Fraction left, Fraction right)
 	return result;
 }
 
-//В классе Fraction написать метод reduce(), который сокращает простую дробь.
-
 
 //#define CONSTRUCTORS_CHECK
 
@@ -170,6 +200,13 @@ int main() {
 	Fraction A(2, 1, 2);
 	Fraction B(3, 2, 5);
 	Fraction C = A * B;
+	C.print();
+	std::cout << "Now reduce! " << std::endl;
+	A.reduce();
+	B.reduce();
+	C.reduce();
+	A.print();
+	B.print();
 	C.print();
 
 	return 0;
