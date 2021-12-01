@@ -84,7 +84,7 @@ public:
 
 	//¬ классе Fraction написать метод reduce(), который сокращает простую дробь.
 
-	void reduce() //сокращает простую дробь
+	Fraction& reduce() //сокращает простую дробь
 	{
 		if (!integer) {
 
@@ -112,20 +112,33 @@ public:
 			}
 		}
 		to_proper();
+		return *this;
 	}
 
-	void to_improper() //переводит дробь в неправильную
+	Fraction& to_improper() //переводит дробь в неправильную
 	{
 		numerator += integer * denominator;
 		integer = 0;	
+		return *this;
 	}
 
-	void to_proper() //переводит дробь в правильную
+	Fraction& to_proper() //переводит дробь в правильную
 	{
 		integer += numerator / denominator;
 		numerator %= denominator;
+		return *this;
 	}
 
+	Fraction inverted()
+	{
+		/*Fraction inverted = *this; //inverted это временно
+		inverted.to_improper();
+		int buffer = inverted.numerator;
+		inverted.numerator = inverted.denominator;
+		inverted.denominator = buffer;*/
+		to_improper();
+		return Fraction(this->denominator, this->numerator);
+	}
 
 
 	void print()
@@ -172,7 +185,21 @@ Fraction operator * (Fraction left, Fraction right)
 	(
 		left.get_numerator() * right.get_numerator(),
 		left.get_denominator() * right.get_denominator()
-	);
+	).to_proper().reduce();
+
+}
+
+Fraction operator / (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	return Fraction //явно вызываем конструктор, который создаЄт временный безым€нный объект
+	(
+		left.get_numerator() * right.get_denominator(),
+		left.get_denominator() * right.get_numerator()
+	).to_proper().reduce();
+
 }
 
 
@@ -217,6 +244,8 @@ int main() {
 	//B.print();
 	//C.print();
 	//D.print();
+	C = A / B;
+	C.print();
 
 	return 0;
 }
