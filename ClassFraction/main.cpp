@@ -49,7 +49,7 @@ public:
 		std::cout << "Default constructor:\t" << this << std::endl;
 	}
 
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -96,6 +96,14 @@ public:
 	{
 		return *this = *this * other;
 	}
+
+	// Type-cast operators;
+
+	explicit operator int() const
+	{
+		return integer;
+	}
+
 
 
 
@@ -233,6 +241,9 @@ Fraction operator / (Fraction left, Fraction right)
 //define OPERATORS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
+//#define CONVERSIONS_FROM_CLASS_TO_OTHER
+//#define HOME_WORK
+
 
 int main() {
 
@@ -314,10 +325,30 @@ int main() {
 	}
 */
 #endif // CONVERSIONS_FROM_OTHER_TO_CLASS
+#ifdef CONVERSIONS_FROM_CLASS_TO_OTHER
+	Fraction A(2);
+	//int a = A;
 
 
 
+	std::cout << a << std::endl;
 
+	int i = (int)A; //or
+	int i = int(A); //or  
+#endif // CONVERSIONS_FROM_CLASS_TO_OTHER
+
+
+
+#ifdef HOME_WORK
+	Fraction A(2, 3, 4);
+	double a = A;
+	std::cout << a << std::endl;
+
+
+	double b = 2.75;
+	Fraction B = b;
+	B.print();
+#endif // HOME_WORK
 
 
 	return 0;
