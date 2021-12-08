@@ -83,6 +83,15 @@ public:
 
 	//Operators
 
+	Fraction& operator = (const Fraction& other)
+	{
+		this->integer = other.integer;
+		this->numerator = other.numerator;
+		this->denominator = other.denominator;
+		std::cout << "Copy assignment:\t" << this << std::endl;
+		return *this;
+	}
+
 	Fraction& operator *= (const Fraction& other)
 	{
 		return *this = *this * other;
@@ -222,7 +231,8 @@ Fraction operator / (Fraction left, Fraction right)
 
 //#define CONSTRUCTORS_CHECK
 //define OPERATORS_CHECK
-//#definr TYPE_CONVERSIONS_BASICS
+//#define TYPE_CONVERSIONS_BASICS
+//#define CONVERSIONS_FROM_OTHER_TO_CLASS
 
 int main() {
 
@@ -278,6 +288,33 @@ int main() {
 	int c = b;    //From more to less without data loss
 	int d = 4.5;  //From more to less with data loss  
 #endif // TYPE_CONVERSIONS_BASICS
+#ifdef CONVERSIONS_FROM_OTHER_TO_CLASS
+
+	double a = 2;      //From 'int' to 'double'
+	Fraction A = 5;    //From 'int' to 'Fraction'
+					   //Single-argument constructor
+	A.print();
+
+	Fraction B;
+	B = 8;              //CopyAssignment
+	B = Fraction(8);
+	B.print();
+
+	//Fraction C = 12; //explicit constructor невозможно вызвать так
+
+	Fraction C(12); //НО explicit constructor всегда можно вызвать так
+
+	Fraction D{ 13 }; //или так
+
+	// Type- cast operators;
+/*	operator type()
+	{
+		......
+		......
+	}
+*/
+#endif // CONVERSIONS_FROM_OTHER_TO_CLASS
+
 
 
 
