@@ -173,6 +173,19 @@ public:
 	}
 };
 
+Fraction operator + (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+return Fraction //явно вызываем конструктор, который создаЄт временный безым€нный объект
+	(
+		left.get_numerator() * right.get_numerator(),
+		left.get_denominator() * right.get_denominator()
+	).to_proper().reduce();
+
+}
+
 
 Fraction operator * (Fraction left, Fraction right)
 {
@@ -208,6 +221,8 @@ Fraction operator / (Fraction left, Fraction right)
 
 
 //#define CONSTRUCTORS_CHECK
+//define OPERATORS_CHECK
+//#definr TYPE_CONVERSIONS_BASICS
 
 int main() {
 
@@ -227,6 +242,7 @@ int main() {
 	Fraction D(2,3, 4);
 	D.print();
 #endif CONSTRUCTORS_CHECK
+#ifdef OPERATORS_CHECK
 
 	double a = 2.5;
 	double b = 3.4;
@@ -253,6 +269,19 @@ int main() {
 
 	A *= B;
 	A.print();
+
+#endif // OPERATORS_CHECK
+#ifdef TYPE_CONVERSIONS_BASICS
+
+	int a = 2;    //no coversion
+	double b = 3; //From less to more
+	int c = b;    //From more to less without data loss
+	int d = 4.5;  //From more to less with data loss  
+#endif // TYPE_CONVERSIONS_BASICS
+
+
+
+
 
 	return 0;
 }
