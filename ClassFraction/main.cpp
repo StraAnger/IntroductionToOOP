@@ -107,12 +107,12 @@ public:
 		return *this;
 	}
 
-	Fraction& operator += (const Fraction& other)
+	Fraction& operator += (Fraction& other)
 	{
 		return *this = *this + other;
 	}
 
-	Fraction& operator -= (const Fraction& other)
+	Fraction& operator -= (Fraction& other)
 	{
 		return *this = *this - other;
 	}
@@ -282,7 +282,6 @@ Fraction operator * (Fraction left, Fraction right)
 
 }
 
-
 Fraction operator / (Fraction left, Fraction right)
 {
 	return left * right.inverted();
@@ -290,12 +289,85 @@ Fraction operator / (Fraction left, Fraction right)
 
 
 
+Fraction operator == (Fraction left,Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	if ((left.get_numerator() == right.get_numerator()) && (left.get_denominator() == right.get_denominator())) 
+	{
+		return true;
+	}
+	return false;
+}
+
+Fraction operator != (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	if ((left.get_numerator() != right.get_numerator()) || (left.get_denominator() != right.get_denominator()))
+	{
+		return true;
+	}
+	return false;
+}
+
+Fraction operator > (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	if (left.get_numerator()* right.get_denominator() > right.get_numerator()* left.get_denominator())
+	{
+		return true;
+	}
+	return false;
+}
+
+Fraction operator >= (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	if (left.get_numerator() * right.get_denominator() >= right.get_numerator() * left.get_denominator())
+	{
+		return true;
+	}
+	return false;
+}
+
+Fraction operator < (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	if (left.get_numerator() * right.get_denominator() < right.get_numerator() * left.get_denominator())
+	{
+		return true;
+	}
+	return false;
+}
+
+Fraction operator <= (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+	if (left.get_numerator() * right.get_denominator() <= right.get_numerator() * left.get_denominator())
+	{
+		return true;
+	}
+	return false;
+}
+
+
 //#define CONSTRUCTORS_CHECK
 //define OPERATORS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
 //#define CONVERSIONS_FROM_CLASS_TO_OTHER
-#define HOME_WORK
+//#define HOME_WORK
 
 
 int main() {
@@ -306,14 +378,14 @@ int main() {
 	double b = 5;
 	Fraction B = 5; //Single-argument constructor
 	B.print();
-/*	Fraction C(7); //Single-argument constructor можно любым из 3х способов
-	C.print();
-	Fraction D{ 8 }; //Single-argument constructor
-	D.print();
-*/
+	/*	Fraction C(7); //Single-argument constructor можно любым из 3х способов
+		C.print();
+		Fraction D{ 8 }; //Single-argument constructor
+		D.print();
+	*/
 	Fraction C(3, 4);
 	C.print();
-	Fraction D(2,3, 4);
+	Fraction D(2, 3, 4);
 	D.print();
 #endif CONSTRUCTORS_CHECK
 #ifdef OPERATORS_CHECK
@@ -403,9 +475,6 @@ int main() {
 	B.print();
 #endif // HOME_WORK
 
-
-	Fraction C = A + B;
-	C.print();
 
 	return 0;
 }
