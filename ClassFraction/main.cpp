@@ -2,6 +2,15 @@
 
 class Fraction;
 Fraction operator * (Fraction left, Fraction right);//Объявляем функцию.
+Fraction operator / (Fraction left, Fraction right);
+Fraction operator + (Fraction left, Fraction right);
+Fraction operator - (Fraction left, Fraction right);
+Fraction operator == (Fraction left, Fraction right);
+Fraction operator != (Fraction left, Fraction right);
+Fraction operator > (Fraction left, Fraction right);
+Fraction operator < (Fraction left, Fraction right);
+Fraction operator >= (Fraction left, Fraction right);
+Fraction operator <= (Fraction left, Fraction right);
 
 class Fraction 
 {
@@ -71,11 +80,11 @@ public:
 
 		std::cout << "1arg Constructor for double:\t" << this << std::endl;
 	
-	
+	    //decimal +=1e-11; //корректировка неточного результата
 		//integer = decimal;
 		//denominator = 1e+9;
 		//decimal -= integer; //Убираем целую часть из 10чной дроби
-  //      numerator = decimal*denominator;
+        //numerator = decimal*denominator;
 		//reduce();
 				
 	}
@@ -145,7 +154,7 @@ public:
 		return integer;
 	}
 
-	operator double() const
+	explicit operator double() const
 	{
 		/*to_improper();
 
@@ -218,24 +227,24 @@ public:
 	}
 
 
-	void print()
+	std::ostream& print(std::ostream& os) const
 	{
 		if (integer) {//Если есть целая часть, выводим её на экран
-			std::cout << integer;
+			os << integer;
 		}
 		if (numerator) {
 			if (integer) {
-				std::cout << "(";
+				os << "(";
 			}
-			std::cout << numerator<<" / "<< denominator;
+			os << numerator<<" / "<< denominator;
 			if (integer) {
-				std::cout << ")";
+				os << ")";
 			}
 		}
 		else if (integer == 0) {
-			std::cout << 0;
+			os << 0;
 		}
-		std::cout << std::endl;
+		return os;
 
 	}
 };
@@ -311,7 +320,10 @@ Fraction operator == (Fraction left,Fraction right)
 
 Fraction operator != (Fraction left, Fraction right)
 {
-	return !(left == right);
+	left.to_improper();
+	right.to_improper();
+
+	return (left.get_numerator() * right.get_denominator() != right.get_numerator() * left.get_denominator());
 }
 
 Fraction operator > (Fraction left, Fraction right)
@@ -319,9 +331,9 @@ Fraction operator > (Fraction left, Fraction right)
 	left.to_improper();
 	right.to_improper();
 
-	if (left.get_numerator()* right.get_denominator() > right.get_numerator()* left.get_denominator())
+	if (left.get_numerator() * right.get_denominator() > right.get_numerator() * left.get_denominator())
 	{
-		return true;
+     	return true;
 	}
 	return false;
 }
@@ -340,21 +352,56 @@ Fraction operator < (Fraction left, Fraction right)
 
 Fraction operator >= (Fraction left, Fraction right)
 {
-	return !(left < right);
+	left.to_improper();
+	right.to_improper();
+
+	if (left.get_numerator() * right.get_denominator() >= right.get_numerator() * left.get_denominator())
+	{
+		return true;
+	}
+	return false;
 }
 
 Fraction operator <= (Fraction left, Fraction right)
 {
-	return !(left > right);
+	left.to_improper();
+	right.to_improper();
+
+	if (left.get_numerator() * right.get_denominator() <= right.get_numerator() * left.get_denominator())
+	{
+		return true;
+	}
+	return false;
 }
 
+std::ostream& operator << (std::ostream& os, const Fraction& obj)
+{
+	//if (obj.get_integer()) {//Если есть целая часть, выводим её на экран
+	//	os << obj.get_integer();
+	//}
+	//if (obj.get_numerator()) {
+	//	if (obj.get_integer()) {
+	//		os << "(";
+	//	}
+	//	os << obj.get_numerator() << " / " << obj.get_denominator();
+	//	if (obj.get_integer()) {
+	//		os << ")";
+	//	}
+	//}
+	//else if (obj.get_integer() == 0) {
+	//	os << 0;
+	//}
+	//return os;
 
+	return obj.print(os);
+
+}
 //#define CONSTRUCTORS_CHECK
 //define OPERATORS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
 //#define CONVERSIONS_FROM_CLASS_TO_OTHER
-#define HOME_WORK
+//#define HOME_WORK
 
 
 int main() {
@@ -459,6 +506,8 @@ int main() {
 	B.print();
 #endif // HOME_WORK
 
-
+	Fraction A(2, 3, 4);
+	std::cout << A << std::endl;
+	
 	return 0;
 }
