@@ -107,9 +107,24 @@ public:
 		return *this;
 	}
 
+	Fraction& operator += (const Fraction& other)
+	{
+		return *this = *this + other;
+	}
+
+	Fraction& operator -= (const Fraction& other)
+	{
+		return *this = *this - other;
+	}
+
 	Fraction& operator *= (const Fraction& other)
 	{
 		return *this = *this * other;
+	}
+
+	Fraction& operator /= ( Fraction& other)
+	{
+		return *this = *this * other.inverted();
 	}
 
 
@@ -217,10 +232,25 @@ Fraction operator + (Fraction left, Fraction right)
 {
 	left.to_improper();
 	right.to_improper();
+		
 
 return Fraction //явно вызываем конструктор, который создаЄт временный безым€нный объект
 	(
-		left.get_numerator() * right.get_numerator(),
+		left.get_numerator() * right.get_denominator() + right.get_numerator() * left.get_denominator(),
+		left.get_denominator() * right.get_denominator()
+	).to_proper().reduce();
+
+}
+
+Fraction operator - (Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+
+
+	return Fraction //явно вызываем конструктор, который создаЄт временный безым€нный объект
+	(
+		left.get_numerator() * right.get_denominator() - right.get_numerator() * left.get_denominator(),
 		left.get_denominator() * right.get_denominator()
 	).to_proper().reduce();
 
@@ -373,6 +403,9 @@ int main() {
 	B.print();
 #endif // HOME_WORK
 
+
+	Fraction C = A + B;
+	C.print();
 
 	return 0;
 }
