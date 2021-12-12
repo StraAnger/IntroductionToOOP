@@ -294,23 +294,12 @@ Fraction operator == (Fraction left,Fraction right)
 	left.to_improper();
 	right.to_improper();
 
-	if ((left.get_numerator() == right.get_numerator()) && (left.get_denominator() == right.get_denominator())) 
-	{
-		return true;
-	}
-	return false;
+	return (left.get_numerator() * right.get_denominator() == right.get_numerator() * left.get_denominator());
 }
 
 Fraction operator != (Fraction left, Fraction right)
 {
-	left.to_improper();
-	right.to_improper();
-
-	if ((left.get_numerator() != right.get_numerator()) || (left.get_denominator() != right.get_denominator()))
-	{
-		return true;
-	}
-	return false;
+	return !(left == right);
 }
 
 Fraction operator > (Fraction left, Fraction right)
@@ -319,18 +308,6 @@ Fraction operator > (Fraction left, Fraction right)
 	right.to_improper();
 
 	if (left.get_numerator()* right.get_denominator() > right.get_numerator()* left.get_denominator())
-	{
-		return true;
-	}
-	return false;
-}
-
-Fraction operator >= (Fraction left, Fraction right)
-{
-	left.to_improper();
-	right.to_improper();
-
-	if (left.get_numerator() * right.get_denominator() >= right.get_numerator() * left.get_denominator())
 	{
 		return true;
 	}
@@ -349,16 +326,14 @@ Fraction operator < (Fraction left, Fraction right)
 	return false;
 }
 
-Fraction operator <= (Fraction left, Fraction right)
+Fraction operator >= (Fraction left, Fraction right)
 {
-	left.to_improper();
-	right.to_improper();
+	return !(left < right);
+}
 
-	if (left.get_numerator() * right.get_denominator() <= right.get_numerator() * left.get_denominator())
-	{
-		return true;
-	}
-	return false;
+Fraction operator >= (Fraction left, Fraction right)
+{
+	return !(left > right);
 }
 
 
@@ -367,7 +342,7 @@ Fraction operator <= (Fraction left, Fraction right)
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
 //#define CONVERSIONS_FROM_CLASS_TO_OTHER
-//#define HOME_WORK
+#define HOME_WORK
 
 
 int main() {
@@ -470,7 +445,7 @@ int main() {
 	std::cout << a << std::endl;
 
 
-	double b = 2.75;
+	double b = 2.76;
 	Fraction B = b;
 	B.print();
 #endif // HOME_WORK
