@@ -70,6 +70,14 @@ public:
 		to_proper().reduce();
 
 		std::cout << "1arg Constructor for double:\t" << this << std::endl;
+	
+	
+		//integer = decimal;
+		//denominator = 1e+9;
+		//decimal -= integer; //Убираем целую часть из 10чной дроби
+  //      numerator = decimal*denominator;
+		//reduce();
+				
 	}
 
 	Fraction(int numerator, int denominator)
@@ -137,11 +145,15 @@ public:
 		return integer;
 	}
 
-	operator double()
+	operator double() const
 	{
-		to_improper();
+		/*to_improper();
 
 		return double(numerator)/double(denominator);
+		*/
+
+		return integer + (double)numerator / denominator;
+
 	}
 
 
@@ -331,7 +343,7 @@ Fraction operator >= (Fraction left, Fraction right)
 	return !(left < right);
 }
 
-Fraction operator >= (Fraction left, Fraction right)
+Fraction operator <= (Fraction left, Fraction right)
 {
 	return !(left > right);
 }
@@ -436,16 +448,13 @@ int main() {
 	int i = (int)A; //or
 	int i = int(A); //or  
 #endif // CONVERSIONS_FROM_CLASS_TO_OTHER
-
-
-
 #ifdef HOME_WORK
 	Fraction A(2, 3, 4);
 	double a = A;
 	std::cout << a << std::endl;
 
 
-	double b = 2.76;
+	double b = 2.75;
 	Fraction B = b;
 	B.print();
 #endif // HOME_WORK
