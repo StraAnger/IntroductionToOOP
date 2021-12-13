@@ -399,93 +399,15 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 
 std::istream& operator >> (std::istream& is, Fraction& obj)
 {
-	char input[10]{};
-	int integer = int();
-	int numerator = int();
-	int denominator = int();
-	bool tag = false;
-	int numberOfOpenBracket = int();
-	int numberOfCloseBracket = int();
-	int numberOfFractionSign = int();
-	int counter = int();
-	int length = int();
+	int integer;
+	int numerator;
+	int denominator;
 
-	is.getline(input, 10);
+	is >> integer >> numerator >> denominator;
+	obj.set_integer(integer);
+	obj.set_numerator(numerator);
+	obj.set_denominator(denominator);
 
-	for (int i = 0; input[i]!='\0'; ++i)
-	{
-		if (input[i] == '(')
-		{
-			numberOfOpenBracket = i;
-		}
-		if (input[i] == ')')
-		{
-			numberOfCloseBracket = i;
-		}
-		if (input[i] == '/')
-		{
-			numberOfFractionSign = i;
-		}
-		length = i;
-	}
-
-	if (numberOfOpenBracket && numberOfCloseBracket)
-	{
-
-		for (int i = numberOfCloseBracket - 1; i > numberOfFractionSign; --i)
-		{
-			denominator += ((input[i] - 48) * pow(10, counter));
-			++counter;
-		}
-
-		obj.set_denominator(denominator);
-
-		counter = int();
-
-		for (int i = numberOfFractionSign - 1; i > numberOfOpenBracket; --i)
-		{
-			numerator += ((input[i] - 48) * pow(10, counter));
-			++counter;
-		}
-
-		obj.set_numerator(numerator);
-
-		counter = int();
-
-		for (int i = numberOfOpenBracket - 1; i >= 0; --i)
-		{
-			integer += ((input[i] - 48) * pow(10, counter));
-			++counter;
-		}
-
-		obj.set_integer(integer);
-
-		counter = int();
-
-	}
-	else
-	{
-		for (int i = length; i > numberOfFractionSign; --i)
-		{
-			denominator += ((input[i] - 48) * pow(10, counter));
-			++counter;
-		}
-
-		obj.set_denominator(denominator);
-
-		counter = int();
-
-		for (int i = numberOfFractionSign - 1; i >=0 ; --i)
-		{
-			numerator += ((input[i] - 48) * pow(10, counter));
-			++counter;
-		}
-
-		obj.set_numerator(numerator);
-
-		counter = int();
-
-	}
 	return is;
 }
 
