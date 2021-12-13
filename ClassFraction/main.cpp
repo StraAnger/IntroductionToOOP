@@ -34,11 +34,11 @@ public:
 
 	void set_integer(int integer) 
 	{
-		this->integer;
+		this->integer=integer;
 	}
 	void set_numerator(int numerator) 
 	{
-		this->numerator;
+		this->numerator=numerator;
 	}
 	void set_denominator(int denominator) 
 	{
@@ -396,6 +396,70 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 	return obj.print(os);
 
 }
+
+std::istream& operator >> (std::istream& is, Fraction& obj)
+{
+	char input[10]{};
+	int integer = int();
+	int numerator = int();
+	int denominator = int();
+	bool tag = false;
+	int numberOfOpenBracket = int();
+	int numberOfCloseBracket = int();
+	int numberOfFractionSign = int();
+	int counter = int();
+
+	is.getline(input, 10);
+
+	for (int i = 0; input[i]!='\0'; ++i)
+	{
+		if (input[i] == '(')
+		{
+			numberOfOpenBracket = i;
+		}
+		if (input[i] == ')')
+		{
+			numberOfCloseBracket = i;
+		}
+		if (input[i] == '/')
+		{
+			numberOfFractionSign = i;
+		}
+	}
+
+	for (int i = numberOfCloseBracket-1; i>numberOfFractionSign; --i)
+	{
+		denominator += ((input[i]-48)*pow(10,counter));
+		++counter;
+	}
+	
+	obj.set_denominator(denominator);
+
+	counter = int();
+
+	for (int i = numberOfFractionSign-1; i > numberOfOpenBracket; --i)
+	{
+		numerator += ((input[i] - 48) * pow(10, counter));
+		++counter;
+	}
+	
+	obj.set_numerator(numerator);
+
+	counter = int();
+
+	for (int i = numberOfOpenBracket - 1; i>=0 ; --i)
+	{
+		integer += ((input[i] - 48) * pow(10, counter));
+		++counter;
+	}
+	
+	obj.set_integer(integer);
+
+	counter = int();
+
+	return is;
+	
+}
 //#define CONSTRUCTORS_CHECK
 //define OPERATORS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
@@ -506,8 +570,17 @@ int main() {
 	B.print();
 #endif // HOME_WORK
 
-	Fraction A(2, 3, 4);
+	//Fraction A(2, 3, 4);
+	//std::cout << A << std::endl;
+	
+
+
+    //Перегрузить оператор ввода :
+	Fraction A;
+	std::cout << "Enter the simple fraction: "; 
+	std::cin >> A;
 	std::cout << A << std::endl;
 	
+		
 	return 0;
 }
