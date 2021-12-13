@@ -399,7 +399,7 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 
 std::istream& operator >> (std::istream& is, Fraction& obj)
 {
-
+	obj = Fraction(); //обнуляем объект
 	const int SIZE = 256;
 	char buffer[SIZE] = {};
 	char delimiters[] = "() /";
