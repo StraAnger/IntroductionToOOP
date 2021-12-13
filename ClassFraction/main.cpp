@@ -399,14 +399,24 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 
 std::istream& operator >> (std::istream& is, Fraction& obj)
 {
-	int integer;
-	int numerator;
-	int denominator;
 
-	is >> integer >> numerator >> denominator;
-	obj.set_integer(integer);
-	obj.set_numerator(numerator);
-	obj.set_denominator(denominator);
+	const int SIZE = 256;
+	char buffer[SIZE] = {};
+	char delimiters[] = "() /";
+	is.getline(buffer, SIZE);
+	char* number[3] = {}; //Этот массив будет хранить части строки, полученные при помощи strtok
+	int n = 0; //Индекс элемента в массиве number
+
+	for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+	{
+		number[n++] = pch;
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << number[i] << '\t';
+	}
+	std::cout << std::endl;
 
 	return is;
 }
