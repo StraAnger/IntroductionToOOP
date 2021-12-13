@@ -412,11 +412,18 @@ std::istream& operator >> (std::istream& is, Fraction& obj)
 		number[n++] = pch;
 	}
 
-	for (int i = 0; i < n; i++)
+	switch (n)
 	{
-		std::cout << number[i] << '\t';
+	case 1: obj.set_integer(atoi(number[0]));
+		break;
+	case 2: obj.set_numerator(atoi(number[0]));
+		obj.set_denominator(atoi(number[1]));
+		break;
+	case 3: 
+		obj.set_integer(atoi(number[0]));
+		obj.set_numerator(atoi(number[1]));
+		obj.set_denominator(atoi(number[2]));
 	}
-	std::cout << std::endl;
 
 	return is;
 }
