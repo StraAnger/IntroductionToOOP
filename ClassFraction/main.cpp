@@ -408,6 +408,7 @@ std::istream& operator >> (std::istream& is, Fraction& obj)
 	int numberOfCloseBracket = int();
 	int numberOfFractionSign = int();
 	int counter = int();
+	int length = int();
 
 	is.getline(input, 10);
 
@@ -425,41 +426,69 @@ std::istream& operator >> (std::istream& is, Fraction& obj)
 		{
 			numberOfFractionSign = i;
 		}
+		length = i;
 	}
 
-	for (int i = numberOfCloseBracket-1; i>numberOfFractionSign; --i)
+	if (numberOfOpenBracket && numberOfCloseBracket)
 	{
-		denominator += ((input[i]-48)*pow(10,counter));
-		++counter;
+
+		for (int i = numberOfCloseBracket - 1; i > numberOfFractionSign; --i)
+		{
+			denominator += ((input[i] - 48) * pow(10, counter));
+			++counter;
+		}
+
+		obj.set_denominator(denominator);
+
+		counter = int();
+
+		for (int i = numberOfFractionSign - 1; i > numberOfOpenBracket; --i)
+		{
+			numerator += ((input[i] - 48) * pow(10, counter));
+			++counter;
+		}
+
+		obj.set_numerator(numerator);
+
+		counter = int();
+
+		for (int i = numberOfOpenBracket - 1; i >= 0; --i)
+		{
+			integer += ((input[i] - 48) * pow(10, counter));
+			++counter;
+		}
+
+		obj.set_integer(integer);
+
+		counter = int();
+
 	}
-	
-	obj.set_denominator(denominator);
-
-	counter = int();
-
-	for (int i = numberOfFractionSign-1; i > numberOfOpenBracket; --i)
+	else
 	{
-		numerator += ((input[i] - 48) * pow(10, counter));
-		++counter;
+		for (int i = length; i > numberOfFractionSign; --i)
+		{
+			denominator += ((input[i] - 48) * pow(10, counter));
+			++counter;
+		}
+
+		obj.set_denominator(denominator);
+
+		counter = int();
+
+		for (int i = numberOfFractionSign - 1; i >=0 ; --i)
+		{
+			numerator += ((input[i] - 48) * pow(10, counter));
+			++counter;
+		}
+
+		obj.set_numerator(numerator);
+
+		counter = int();
+
 	}
-	
-	obj.set_numerator(numerator);
-
-	counter = int();
-
-	for (int i = numberOfOpenBracket - 1; i>=0 ; --i)
-	{
-		integer += ((input[i] - 48) * pow(10, counter));
-		++counter;
-	}
-	
-	obj.set_integer(integer);
-
-	counter = int();
-
 	return is;
-	
 }
+
 //#define CONSTRUCTORS_CHECK
 //define OPERATORS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
