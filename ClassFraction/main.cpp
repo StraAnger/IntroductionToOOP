@@ -416,6 +416,7 @@ std::istream& operator >> (std::istream& is, Fraction& obj)
 	{
 	case 1: obj.set_integer(atoi(number[0]));
 		break;
+		//atoi()- ASCII-syting to integer, преобразует строку ASCII- символов в значение типа int
 	case 2: obj.set_numerator(atoi(number[0]));
 		obj.set_denominator(atoi(number[1]));
 		break;
