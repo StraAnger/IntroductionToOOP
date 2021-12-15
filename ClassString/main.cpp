@@ -9,7 +9,18 @@ public:
 
 	//Get&seT
 
-	const char* get_str()const
+	int get_size() const
+	{
+		return size;
+	}
+
+
+	const char* get_str() const
+	{
+		return str;
+	}
+
+    char* get_str()
 	{
 		return str;
 	}
@@ -54,7 +65,7 @@ public:
 	String& operator=(const String& other)
 	{
 		if (this == &other) 
-			return *this;      //любой оператор присваивания начинается с этого ( вдруг мы присваиваем сами себе), потом удаление старого.
+			return *this;      //любой оператор присваивания начинается с этого ( вдруг мы присваиваем сами себе, если так- выходим ( return)), потом удаление старого.
 		
 		delete[] this->str;  //удаляем память от старого объекта
 		//Deep copy ( Побитовое копирование ( оно всё же побайтовое, но говорят так)
@@ -78,6 +89,16 @@ public:
 
 };
 
+String operator + (const String& left, const String& right)
+{
+	String result(left.get_size() + right.get_size() - 1);
+	for (int i = 0; i < left.get_size(); ++i)
+		result.get_str()[i] = left.get_str()[i];
+	for (int i = 0; i < right.get_size(); ++i)
+		result.get_str()[i+ left.get_size()-1] = right.get_str()[i];
+	return result;
+}
+
 
 std::ostream& operator << (std::ostream& os, const String& obj)
 {
@@ -85,8 +106,14 @@ std::ostream& operator << (std::ostream& os, const String& obj)
 }
 
 
+
+
+//#define CONSTRUCTORS_CHECK
+
+
 int main()
 {
+#ifdef CONSTRUCTORS_CHECK
 	String str1; //Default constructor
 	str1.print();
 	std::cout << str1 << std::endl;
@@ -105,8 +132,16 @@ int main()
 
 	String str5;
 	str5 = str3;   //то же самое, что и конструктор копирования, но уже для существующего объекта
-                   //CopyAssignment ( operator=)
+				   //CopyAssignment ( operator=)
 	std::cout << str5 << std::endl;
+#endif // CONSTRUCTORS_CHECK
+
+
+	String str1 = "Hello";
+	String str2 = "World";
+	String str3 = str1+str2;
+	std::cout << str3 << std::endl;
+
 
 
 	return 0;
