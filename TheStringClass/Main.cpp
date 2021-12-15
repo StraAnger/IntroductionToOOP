@@ -3,7 +3,7 @@
 class Strings
 {
 	int length;
-	char string[];
+	char string[80];
 	
 public:
 
@@ -23,9 +23,10 @@ public:
 		{
 			
 			this->length = 80;
-			for (int i = 0; i<50; ++i)
+			
+			for (int i = 0; i<length; ++i)
 			{
-				string[i] = '1';
+				string[i] = ' ';
 			}
 
 			
@@ -36,13 +37,59 @@ public:
 		{
 
 			this->length =length;
-			for (int i = 0; i < 50; ++i)
+			for (int i = 0; i <length; ++i)
 			{
-				this->string[i] = '2';
+				this->string[i] = ' ';
 			}
 
 
 			std::cout << "1Arg constructor" << std::endl;
+		}
+
+		Strings(const char string[])
+		{
+			int counter = 0;
+			for (int i = 0; string[i]; ++i)
+			{
+				string[i];
+				++counter;
+			}
+			this->length = counter;
+			for (int i = 0; i < length; ++i)
+				this->string[i] = string[i];
+			counter = 0;
+			std::cout << "Type cast constructor" << std::endl;
+		}
+
+		Strings(const char string1[], const char string2[])
+		{
+			int counter1 = 0;
+			for (int i = 0; string1[i]; ++i)
+			{
+				string[i];
+				++counter1;
+			}
+
+			int counter2 = 0;
+			for (int i = 0; string2[i]; ++i)
+			{
+				string[i];
+				++counter2;
+			}
+
+
+			this->length = counter1+counter2;
+			
+			for (int i = 0; i < counter1; ++i)
+				this->string[i] = string1[i];
+			
+			for (int i = counter1; i < counter2; ++i)
+				this->string[i] = string2[i];
+			
+			
+			counter1 = 0;
+			counter2 = 0;
+			std::cout << "Conc. constructor" << std::endl;
 		}
 
 
@@ -53,21 +100,14 @@ public:
 }
 	//Operators:
 
-		/*String& operator=(const String& other)
-		{
-			this->string[i] = other.integer;
-			this->numerator = other.numerator;
-			this->denominator = other.denominator;
-			cout << "CopyAssignment:\t" << this << endl;
-			return *this;
-		}*/
+		
 
 	//Methods:
 
 
 		void print() const
 		{
-			for (int i = 0; i < 50; ++i)
+			for (int i = 0; i < length; ++i)
 				std::cout << this->get_string(i);
 			std::cout << std::endl;
 		}
@@ -75,20 +115,32 @@ public:
 };
 
 
+Strings operator + (Strings left, Strings right)
+{
+	return Strings(left,right);
+}
+
+
 int main()
 {
 	
-	Strings str;
-//	str.print();
+	Strings str;	//Empty string with size of 80 bytes
+	str.print();
+	Strings str1 = "Hello";
+	str1.print();
+	Strings str2 = "World";
+	str2.print();
+	Strings str4(25);	//Empty string with size of 25 bytes
+	str4.print();
+	
 
 
-	//String str;	//Empty string with size of 80 bytes
-	//String str1 = "Hello";
-	//String str2 = "World";
+	
+
 	//String str3 = str1 + str2;
 	//std::cout << str3 << std::endl;
 
-	//String str4(25);	//Empty string with size of 25 bytes
+	
 
 
 	return 0;
