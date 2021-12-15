@@ -51,7 +51,6 @@ public:
 			int counter = 0;
 			for (int i = 0; string[i]; ++i)
 			{
-				string[i];
 				++counter;
 			}
 			this->length = counter;
@@ -66,14 +65,12 @@ public:
 			int counter1 = 0;
 			for (int i = 0; string1[i]; ++i)
 			{
-				string[i];
 				++counter1;
 			}
 
 			int counter2 = 0;
 			for (int i = 0; string2[i]; ++i)
 			{
-				string[i];
 				++counter2;
 			}
 
@@ -117,7 +114,26 @@ public:
 
 Strings operator + (Strings left, Strings right)
 {
-	return Strings(left,right);
+   return Strings(left.get_string,right.get_string);
+}
+
+std::ostream& operator<<(std::ostream& os, const Strings& obj)
+{
+	int counter = 0;
+	for (int i = 0; obj.get_string(i); ++i)
+	{
+		++counter;
+	}
+	int length = counter;
+
+
+	for (int i = 0; i < length; ++i)
+	{
+		os << obj.get_string(i);
+		std::cout << std::endl;
+	}
+	counter = 0;
+	return os;
 }
 
 
@@ -132,13 +148,8 @@ int main()
 	str2.print();
 	Strings str4(25);	//Empty string with size of 25 bytes
 	str4.print();
-	
-
-
-	
-
-	//String str3 = str1 + str2;
-	//std::cout << str3 << std::endl;
+    Strings str3 = str1 + str2;
+	std::cout << str2 << std::endl;
 
 	
 
