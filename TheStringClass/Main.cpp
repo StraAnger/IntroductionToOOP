@@ -114,7 +114,7 @@ public:
 
 Strings operator + (Strings left, Strings right)
 {
-   return Strings(left.get_string,right.get_string);
+   return Strings(left.get_string(i),right.get_string(i));
 }
 
 std::ostream& operator<<(std::ostream& os, const Strings& obj)
