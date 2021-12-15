@@ -32,12 +32,41 @@ public:
 
 	}
 
+	String(const String& other)
+	{
+		//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
+		this->size = other.size;
+		this->str = new char[size] {};
+		for (int i = 0; i < size; ++i)
+			this->str[i] = other.str[i];
+		std::cout << "CopyConstructor:\t" << this << std::endl;
+	}
+
 
 	~String()
 	{
 		delete[] str;
 		std::cout << "Destructor:\t" << this << std::endl;
 	}
+
+	//	Operators
+
+	String& operator=(const String& other)
+	{
+		if (this == &other) 
+			return *this;      //любой оператор присваивани€ начинаетс€ с этого ( вдруг мы присваиваем сами себе), потом удаление старого.
+		
+		delete[] this->str;  //удал€ем пам€ть от старого объекта
+		//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
+		this->size = other.size;
+		this->str = new char[size] {};
+		for (int i = 0; i < size; ++i)
+			this->str[i] = other.str[i];
+		std::cout << "CopyAsignment:\t" << this << std::endl;
+		return *this;
+	}
+
+
 
 	//	Methods
 
@@ -66,7 +95,18 @@ int main()
 	str2.print();
 
 	String str3 = "Hello";
+	str3 = str3;
 	std::cout << str3 << std::endl;
+
+	String str4 = str3; //CopyConstructor
+	//Deep copy
+	//Shallow copy
+	std::cout << str4 << std::endl;
+
+	String str5;
+	str5 = str3;   //то же самое, что и конструктор копировани€, но уже дл€ существующего объекта
+                   //CopyAssignment ( operator=)
+	std::cout << str5 << std::endl;
 
 
 	return 0;
