@@ -38,7 +38,7 @@ public:
 		std::cout << "Constructor:\t" << this << std::endl;
 	}
 
-	String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})   //или char*- это то же самое
+	String(const char str[]) : String(strlen(str)+1)
 	{
 		/*this->size = strlen(str) + 1;
 		this->str = new char[size] {};*/
