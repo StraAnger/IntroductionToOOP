@@ -1,5 +1,10 @@
 #include <iostream>
 
+#define delimiter "\n---------------------------------------------------------\n"
+
+class String;
+String operator + (const String& left, const String& right);
+
 class String
 {
 	int size; //размер строки в Байтах- то есть с учётом 0ля терминирующего
@@ -77,7 +82,20 @@ public:
 		return *this;
 	}
 
+	String& operator +=(const String& other)
+	{
+		return *this = *this + other;
+	}
 
+	const char& operator[](int i)const
+	{
+		return str[i];
+	}
+
+	char& operator[](int i)
+	{
+		return str[i];
+	}
 
 	//	Methods
 
@@ -93,9 +111,12 @@ String operator + (const String& left, const String& right)
 {
 	String result(left.get_size() + right.get_size() - 1);
 	for (int i = 0; i < left.get_size(); ++i)
-		result.get_str()[i] = left.get_str()[i];
+		//l-value=r-value;
+		result[i] = left[i];
+		//result.get_str()[i] = left.get_str()[i];
 	for (int i = 0; i < right.get_size(); ++i)
-		result.get_str()[i+ left.get_size()-1] = right.get_str()[i];
+		result[i + left.get_size() - 1] = right[i];
+		//result.get_str()[i+ left.get_size()-1] = right.get_str()[i];
 	return result;
 }
 
@@ -105,11 +126,27 @@ std::ostream& operator << (std::ostream& os, const String& obj)
 	return os << obj.get_str();
 }
 
+std::istream& operator >> (std::istream& is, String& obj)
+{
+	//return is >> obj.get_str();
+	const int SIZE = 10240;
+	char buffer[ SIZE ] = {};
+	is >> buffer;
+	obj = buffer;
+	return is;
+}
 
-
+std::istream& getline (std::istream& is, String& obj)
+{
+	const int SIZE = 1024 * 1000;
+	char buffer[SIZE] = {};
+	is.getline(buffer, SIZE);
+	obj = buffer;
+	return is;
+}
 
 //#define CONSTRUCTORS_CHECK
-
+//#define OPERATORS_CHECK
 
 int main()
 {
@@ -136,13 +173,28 @@ int main()
 	std::cout << str5 << std::endl;
 #endif // CONSTRUCTORS_CHECK
 
-
+#ifdef OPERATORS_CHECK
 	String str1 = "Hello";
 	String str2 = "World";
-	String str3 = str1+str2;
+	std::cout << delimiter << std::endl;
+	String str3 = str1 + str2;
+	std::cout << delimiter << std::endl;
 	std::cout << str3 << std::endl;
+	std::cout << delimiter << std::endl;
+	str1 += str2;
+	std::cout << delimiter << std::endl;
+	std::cout << str1 << std::endl;
+	std::cout << delimiter << std::endl;
+#endif // OPERATORS_CHECK
 
-
+	
+	String str;
+	std::cout << "Enter string: ";
+	//std::cin >> str;
+	getline(std::cin, str);
+	std::cout << str << std::endl;
+	str.print();
+	std::cout << delimiter << std::endl;
 
 	return 0;
 }
