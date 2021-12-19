@@ -48,7 +48,7 @@ public:
 
 	}
 
-	String(const String& other) :size(other.size), str(new char[size] {})
+	String(const String& other) :String(other.str)
 	{
 		//Deep copy ( Побитовое копирование ( оно всё же побайтовое, но говорят так)
 		/*this->size = other.size;
