@@ -31,28 +31,28 @@ public:
 	}
 
 
-	explicit String(int size = 80)
+	explicit String(int size = 80) :size(size), str(new char[size] {})  //при инициализации в заголовке возможны только круглые скобки
 	{
-		this->size = size;
-		this->str = new char[size] {}; //{}- зануляется память, выделяемая для строки
+		//this->size = size;
+		//this->str = new char[size] {}; //{}- зануляется память, выделяемая для строки
 		std::cout << "Constructor:\t" << this << std::endl;
 	}
 
-	String(const char str[])   //или char*- это то же самое
+	String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})   //или char*- это то же самое
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		/*this->size = strlen(str) + 1;
+		this->str = new char[size] {};*/
 		for (int i = 0; str[i]; ++i)
 			this->str[i] = str[i];
 		std::cout << "Constructor:\t" << this << std::endl;
 
 	}
 
-	String(const String& other)
+	String(const String& other) :size(other.size), str(new char[size] {})
 	{
 		//Deep copy ( Побитовое копирование ( оно всё же побайтовое, но говорят так)
-		this->size = other.size;
-		this->str = new char[size] {};
+		/*this->size = other.size;
+		this->str = new char[size] {};*/
 		for (int i = 0; i < size; ++i)
 			this->str[i] = other.str[i];
 		std::cout << "CopyConstructor:\t" << this << std::endl;
@@ -142,11 +142,12 @@ std::istream& getline (std::istream& is, String& obj)
 	char buffer[SIZE] = {};
 	is.getline(buffer, SIZE);
 	obj = buffer;
-	return is;
+	return is;//winver
 }
 
 //#define CONSTRUCTORS_CHECK
 //#define OPERATORS_CHECK
+//#define INPUT_CHECK
 
 int main()
 {
@@ -187,7 +188,8 @@ int main()
 	std::cout << delimiter << std::endl;
 #endif // OPERATORS_CHECK
 
-	
+#ifdef INPUT_CHECK
+
 	String str;
 	std::cout << "Enter string: ";
 	//std::cin >> str;
@@ -195,6 +197,32 @@ int main()
 	std::cout << str << std::endl;
 	str.print();
 	std::cout << delimiter << std::endl;
+
+#endif // INPUT_CHECK
+
+	String str1;            //Default constructor
+	str1.print();
+	String str2 = "Hello";  //Single argument constructor
+	str2.print();
+	String str3 = str2;     //Copy constructor
+	str3.print();
+	String str4();          //Здесь не вызывается никакой конструктор, поскольку здесь не создаётся объект, 
+	                        // а объявляется функция str4(), которая ничего не принимает, и возвращает значение типа String.
+	                        // конструктор по- умолчанию ы так не вызовем, str4 это функция, а не объект.
+	                        //а вызвать его явным образом можно так:
+
+	String str5{};          //Default constructor явно вызываем
+	str5.print();
+
+	//или для инициализации
+
+	String str6("World");     //1 arg constructor
+	String str7{ "Planet" };  //1 arg constructor
+
+
+
+
+
 
 	return 0;
 }
