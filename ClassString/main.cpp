@@ -31,30 +31,30 @@ public:
 	}
 
 
-	explicit String(int size = 80)
+	explicit String(int size = 80) :size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {}; //{}- занул€етс€ пам€ть, выдел€ема€ дл€ строки
-		std::cout << "Constructor:\t" << this << std::endl;
+		//this->size = size;
+		//this->str = new char[size] {}; //{}- занул€етс€ пам€ть, выдел€ема€ дл€ строки
+		std::cout << "SizeConstructor:\t" << this << std::endl;
 	}
 
-	String(const char str[])   //или char*- это то же самое
+	String(const char str[]):String(strlen(str)+1) //или char*- это то же самое
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		/*his->size = strlen(str) + 1;
+		this->str = new char[size] {};*/
 		for (int i = 0; str[i]; ++i)
 			this->str[i] = str[i];
 		std::cout << "Constructor:\t" << this << std::endl;
 
 	}
 
-	String(const String& other)
+	String(const String& other):String(other.str)
 	{
 		//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
-		this->size = other.size;
-		this->str = new char[size] {};
-		for (int i = 0; i < size; ++i)
-			this->str[i] = other.str[i];
+		//this->size = other.size;
+		//this->str = new char[size] {};
+		//for (int i = 0; i < size; ++i)
+		//	this->str[i] = other.str[i];
 		std::cout << "CopyConstructor:\t" << this << std::endl;
 	}
 
@@ -146,7 +146,9 @@ std::istream& getline (std::istream& is, String& obj)
 }
 
 //#define CONSTRUCTORS_CHECK
-//#define OPERATORS_CHECK
+#define OPERATORS_CHECK
+//#define INPUT_CHECK
+
 
 int main()
 {
@@ -188,6 +190,7 @@ int main()
 #endif // OPERATORS_CHECK
 
 	
+#ifdef INPUT_CHECK
 	String str;
 	std::cout << "Enter string: ";
 	//std::cin >> str;
@@ -195,6 +198,8 @@ int main()
 	std::cout << str << std::endl;
 	str.print();
 	std::cout << delimiter << std::endl;
+#endif // INPUT_CHECK
+
 
 	return 0;
 }
