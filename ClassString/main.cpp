@@ -2,6 +2,11 @@
 
 #define delimiter "\n---------------------------------------------------------\n"
 
+
+/////////////////////////////////////////////////////////////////
+/////////////////   Class declaration- объ€вление класса  ///////
+/////////////////////////////////////////////////////////////////
+
 class String;
 String operator + (const String& left, const String& right);
 
@@ -14,98 +19,152 @@ public:
 
 	//Get&seT
 
-	int get_size() const
-	{
-		return size;
-	}
+	int get_size() const;
 
 
-	const char* get_str() const
-	{
-		return str;
-	}
+	const char* get_str() const;
 
-    char* get_str()
-	{
-		return str;
-	}
+	char* get_str();
 
 
-	explicit String(int size = 80) :size(size), str(new char[size] {})
-	{
-		//this->size = size;
-		//this->str = new char[size] {}; //{}- занул€етс€ пам€ть, выдел€ема€ дл€ строки
-		std::cout << "SizeConstructor:\t" << this << std::endl;
-	}
+	explicit String(int size = 80);
 
-	String(const char str[]):String(strlen(str)+1) //или char*- это то же самое
-	{
-		/*his->size = strlen(str) + 1;
-		this->str = new char[size] {};*/
-		for (int i = 0; str[i]; ++i)
-			this->str[i] = str[i];
-		std::cout << "Constructor:\t" << this << std::endl;
+	String(const char str[]);
 
-	}
-
-	String(const String& other):String(other.str)
-	{
-		//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
-		//this->size = other.size;
-		//this->str = new char[size] {};
-		//for (int i = 0; i < size; ++i)
-		//	this->str[i] = other.str[i];
-		std::cout << "CopyConstructor:\t" << this << std::endl;
-	}
+	String(const String& other);
 
 
-	~String()
-	{
-		delete[] str;
-		std::cout << "Destructor:\t" << this << std::endl;
-	}
+	~String();
 
 	//	Operators
 
-	String& operator=(const String& other)
-	{
-		if (this == &other) 
-			return *this;      //любой оператор присваивани€ начинаетс€ с этого ( вдруг мы присваиваем сами себе, если так- выходим ( return)), потом удаление старого.
-		
-		delete[] this->str;  //удал€ем пам€ть от старого объекта
-		//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
-		this->size = other.size;
-		this->str = new char[size] {};
-		for (int i = 0; i < size; ++i)
-			this->str[i] = other.str[i];
-		std::cout << "CopyAsignment:\t" << this << std::endl;
-		return *this;
-	}
+	String& operator=(const String& other);
 
-	String& operator +=(const String& other)
-	{
-		return *this = *this + other;
-	}
+	String& operator +=(const String& other);
 
-	const char& operator[](int i)const
-	{
-		return str[i];
-	}
+	const char& operator[](int i)const;
 
-	char& operator[](int i)
-	{
-		return str[i];
-	}
+	char& operator[](int i);
 
 	//	Methods
 
-	void print() const
-	{
-		std::cout << "Size:\t" << size << std::endl;
-		std::cout << "Str:\t" << str << std::endl;
-	}
+	void print() const;
 
 };
+
+
+///////////////////////////////////////////////////////////////////////////
+/////////////////   Class declaration end- конец объ€вление класса  ///////
+///////////////////////////////////////////////////////////////////////////
+
+
+//////--------------------------------------------------------------------------
+
+
+/////////////////////////////////////////////////////////////////
+/////////////////   Class definition- определение класса  ///////
+/////////////////////////////////////////////////////////////////
+
+
+// ::- Scope operator, оператор разрешени€ видимости
+
+//Get&seT
+
+int String::get_size() const
+{
+	return size;
+}
+
+
+const char* String::get_str() const
+{
+	return str;
+}
+
+char* String::get_str()
+{
+	return str;
+}
+
+
+String::String(int size) :size(size), str(new char[size] {})
+{
+	//this->size = size;
+	//this->str = new char[size] {}; //{}- занул€етс€ пам€ть, выдел€ема€ дл€ строки
+	std::cout << "SizeConstructor:\t" << this << std::endl;
+}
+
+String::String(const char str[]) :String(strlen(str) + 1) //или char*- это то же самое
+{
+	/*his->size = strlen(str) + 1;
+	this->str = new char[size] {};*/
+	for (int i = 0; str[i]; ++i)
+		this->str[i] = str[i];
+	std::cout << "Constructor:\t" << this << std::endl;
+
+}
+
+String::String(const String& other) :String(other.str)
+{
+	//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
+	//this->size = other.size;
+	//this->str = new char[size] {};
+	//for (int i = 0; i < size; ++i)
+	//	this->str[i] = other.str[i];
+	std::cout << "CopyConstructor:\t" << this << std::endl;
+}
+
+
+String::~String()
+{
+	delete[] str;
+	std::cout << "Destructor:\t" << this << std::endl;
+}
+
+//	Operators
+
+String& String::operator=(const String& other)
+{
+	if (this == &other)
+		return *this;      //любой оператор присваивани€ начинаетс€ с этого ( вдруг мы присваиваем сами себе, если так- выходим ( return)), потом удаление старого.
+
+	delete[] this->str;  //удал€ем пам€ть от старого объекта
+	//Deep copy ( ѕобитовое копирование ( оно всЄ же побайтовое, но говор€т так)
+	this->size = other.size;
+	this->str = new char[size] {};
+	for (int i = 0; i < size; ++i)
+		this->str[i] = other.str[i];
+	std::cout << "CopyAsignment:\t" << this << std::endl;
+	return *this;
+}
+
+String& String::operator +=(const String& other)
+{
+	return *this = *this + other;
+}
+
+const char& String::operator[](int i)const
+{
+	return str[i];
+}
+
+char& String::operator[](int i)
+{
+	return str[i];
+}
+
+//	Methods
+
+void String::print() const
+{
+	std::cout << "Size:\t" << size << std::endl;
+	std::cout << "Str:\t" << str << std::endl;
+}
+
+
+
+
+
 
 String operator + (const String& left, const String& right)
 {
@@ -144,6 +203,15 @@ std::istream& getline (std::istream& is, String& obj)
 	obj = buffer;
 	return is;
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////
+/////////////////   Class definition end- конец определени€ класса  ///////
+//////////////////////////////////////////////////////////////////////////
+
+
+
 
 //#define CONSTRUCTORS_CHECK
 #define OPERATORS_CHECK
