@@ -58,7 +58,7 @@ public:
 		std::cout << "CopyConstructor:\t" << this << std::endl;
 	}
 
-	String(String&& other)
+	String(String&& other)noexcept
 	{
 		//MoveConstructor должен выполнять shallowCopy- поверхностное копирование
 		//пока не написали- вызывался CopyConstructor
@@ -96,6 +96,10 @@ public:
 
 	String& operator=(String&& other)
 	{
+
+		if (this == &other)
+			return *this;
+
 		delete this->str;
 		this->size = other.size;
 		this->str = other.str;
