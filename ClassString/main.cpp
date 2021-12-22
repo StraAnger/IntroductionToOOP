@@ -53,6 +53,18 @@ public:
 		std::cout << "Destructor:\t" << this << std::endl;
 	}
 
+	//Operators
+
+	const int& operator[](int i)const
+	{
+		return *matrix[i];
+	}
+
+	int& operator[](int i)
+	{
+		return *matrix[i];
+	}
+
 	//Methods
 
 	void print() const
@@ -66,6 +78,26 @@ public:
 	}
 
 };
+
+Matrix operator + (const Matrix& left, const Matrix& right) 
+{
+	if ((left.getRows() != right.getRows()) || (left.getColumns() != right.getColumns()))
+	{
+		std::cout << "Matrix of different dimension!!! + not allowed" << std::endl;
+		exit(0);
+	}
+
+	Matrix sumMatrix(left.getRows(),left.getColumns());
+
+	for (int i = 0; i < left.getRows(); ++i) {
+		for (int j = 0; j < left.getColumns(); ++j) {
+			sumMatrix.getMatrix()[i][j] = left.getMatrix()[i][j] + right.getMatrix()[i][j];
+		}
+
+	}
+		
+	return sumMatrix;
+}
 
 
 
