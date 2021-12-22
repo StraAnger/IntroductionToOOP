@@ -58,6 +58,18 @@ public:
 		std::cout << "CopyConstructor:\t" << this << std::endl;
 	}
 
+	String(String&& other)
+	{
+		//MoveConstructor должен выполнять shallowCopy- поверхностное копирование
+		//пока не написали- вызывался CopyConstructor
+		this->size = other.size;
+		this->str = other.str;   // просто копируем адрес памяти, принадлежащий другому объекту
+		//Зануляем другой объект для того, чтобы его память не смог удалить деструктор ( иначе упадёт всё)
+		other.size = 0;
+		other.str = nullptr;
+		std::cout << "MoveConstructor\t" << this << std::endl;
+	}
+
 
 	~String()
 	{
@@ -81,6 +93,19 @@ public:
 		std::cout << "CopyAsignment:\t" << this << std::endl;
 		return *this;
 	}
+
+	String& operator=(String&& other)
+	{
+		delete this->str;
+		this->size = other.size;
+		this->str = other.str;
+
+		other.size = 0;
+		other.str = nullptr;
+		std::cout << "MoveAssignment:\t" << this << std::endl;
+		return  *this;
+	}
+
 
 	String& operator +=(const String& other)
 	{
@@ -146,7 +171,7 @@ std::istream& getline (std::istream& is, String& obj)
 }
 
 //#define CONSTRUCTORS_CHECK
-//#define OPERATORS_CHECK
+#define OPERATORS_CHECK
 
 int main()
 {
@@ -177,24 +202,25 @@ int main()
 	String str1 = "Hello";
 	String str2 = "World";
 	std::cout << delimiter << std::endl;
-	String str3 = str1 + str2;
+	String str3;
+	str3 = str1 + str2;
 	std::cout << delimiter << std::endl;
 	std::cout << str3 << std::endl;
 	std::cout << delimiter << std::endl;
-	str1 += str2;
+	/*str1 += str2;
 	std::cout << delimiter << std::endl;
 	std::cout << str1 << std::endl;
-	std::cout << delimiter << std::endl;
+	std::cout << delimiter << std::endl;*/
 #endif // OPERATORS_CHECK
 
 	
-	String str;
-	std::cout << "Enter string: ";
-	//std::cin >> str;
-	getline(std::cin, str);
-	std::cout << str << std::endl;
-	str.print();
-	std::cout << delimiter << std::endl;
+	//String str;
+	//std::cout << "Enter string: ";
+	////std::cin >> str;
+	//getline(std::cin, str);
+	//std::cout << str << std::endl;
+	//str.print();
+	//std::cout << delimiter << std::endl;
 
 	return 0;
 }
