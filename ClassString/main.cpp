@@ -2,6 +2,9 @@
 
 #define delimiter "\n---------------------------------------------------------\n"
 
+//#define CLASS_MATRIX
+#ifdef CLASS_MATRIX
+	
 class Matrix
 {
 	int rows;
@@ -27,17 +30,17 @@ public:
 
 	//Constructors
 
-	explicit Matrix(int rows = 3,int columns=3)
+	explicit Matrix(int rows = 3, int columns = 3)
 	{
 		this->rows = rows;
 		this->columns = columns;
-		this->matrix = new int*[rows];
+		this->matrix = new int* [rows];
 		for (int i = 0; i < rows; ++i)
 			matrix[i] = new int[columns];
 		for (int i = 0; i < rows; ++i)
 			for (int j = 0; j < columns; ++j)
 			{
-				matrix[i][j]=0;
+				matrix[i][j] = 0;
 			}
 
 		std::cout << "DefaultConstructor:\t" << this << std::endl;
@@ -79,7 +82,7 @@ public:
 
 };
 
-Matrix operator + (const Matrix& left, const Matrix& right) 
+Matrix operator + (const Matrix& left, const Matrix& right)
 {
 	if ((left.getRows() != right.getRows()) || (left.getColumns() != right.getColumns()))
 	{
@@ -87,7 +90,7 @@ Matrix operator + (const Matrix& left, const Matrix& right)
 		exit(0);
 	}
 
-	Matrix sumMatrix(left.getRows(),left.getColumns());
+	Matrix sumMatrix(left.getRows(), left.getColumns());
 
 	for (int i = 0; i < left.getRows(); ++i) {
 		for (int j = 0; j < left.getColumns(); ++j) {
@@ -95,16 +98,18 @@ Matrix operator + (const Matrix& left, const Matrix& right)
 		}
 
 	}
-		
+
 	return sumMatrix;
 }
+#endif // CLASS_MATRIX
+
 
 
 
 //#define CONSTRUCTORS_CHECK
 //#define OPERATORS_CHECK
 //#define INPUT_CHECK
-#define MATRIX_CHECK
+//#define MATRIX_CHECK
 
 int main()
 {
