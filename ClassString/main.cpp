@@ -94,7 +94,7 @@ Matrix operator + (const Matrix& left, const Matrix& right)
 
 	for (int i = 0; i < left.getRows(); ++i) {
 		for (int j = 0; j < left.getColumns(); ++j) {
-			sumMatrix[i][j] = left[i][j] + right[i][j];
+			sumMatrix[j] = left[j] + right[j];
 		}
 
 	}
