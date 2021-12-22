@@ -1,17 +1,78 @@
 #include "String.h"
+
 #define delimiter "\n---------------------------------------------------------\n"
 
+class Matrix
+{
+	int rows;
+	int columns;
+	int** matrix;
 
-//////--------------------------------------------------------------------------
+public:
 
+	//Get&Set
 
-///Methods out of Class
+	int getRows()const
+	{
+		return rows;
+	}
+	int getColumns()const
+	{
+		return columns;
+	}
+	int** getMatrix()const
+	{
+		return matrix;
+	}
+
+	//Constructors
+
+	explicit Matrix(int rows = 3,int columns=3)
+	{
+		this->rows = rows;
+		this->columns = columns;
+		this->matrix = new int*[rows];
+		for (int i = 0; i < rows; ++i)
+			matrix[i] = new int[columns];
+		for (int i = 0; i < rows; ++i)
+			for (int j = 0; j < columns; ++j)
+			{
+				matrix[i][j]=0;
+			}
+
+		std::cout << "DefaultConstructor:\t" << this << std::endl;
+	}
+
+	//Destructor
+
+	~Matrix()
+	{
+		for (int i = 0; i < rows; ++i)
+			delete matrix[i];
+		delete[] matrix;
+		std::cout << "Destructor:\t" << this << std::endl;
+	}
+
+	//Methods
+
+	void print() const
+	{
+		for (int i = 0; i < rows; ++i)
+		{
+			for (int j = 0; j < columns; ++j)
+				std::cout << matrix[i][j] << " ";
+			std::cout << std::endl;
+		}
+	}
+
+};
+
 
 
 //#define CONSTRUCTORS_CHECK
-#define OPERATORS_CHECK
+//#define OPERATORS_CHECK
 //#define INPUT_CHECK
-
+#define MATRIX_CHECK
 
 int main()
 {
@@ -63,6 +124,14 @@ int main()
 	std::cout << delimiter << std::endl;
 #endif // INPUT_CHECK
 
+
+#ifdef MATRIX_CHECK
+
+	Matrix A;
+	A.print();
+
+
+#endif // MATRIX_CHECK
 
 	return 0;
 }
