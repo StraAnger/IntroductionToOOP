@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31729.503
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Introduction to OOP", "Introduction to OOP\Introduction to OOP.vcxproj", "{A540CB99-A327-43BE-9E42-1BA6D44A1D20}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TheStringClass", "TheStringClass\TheStringClass.vcxproj", "{6F9D67EA-E2B1-4A03-A2B3-AD240C6051C2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClassString", "ClassString\ClassString.vcxproj", "{0D2EB003-E5BC-4123-9DE8-ED15D31E0AA7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClassBinary", "Binary\Binary.vcxproj", "{DD37B304-ACEA-499E-A136-EF2FBBA97557}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{0D2EB003-E5BC-4123-9DE8-ED15D31E0AA7}.Release|x64.Build.0 = Release|x64
 		{0D2EB003-E5BC-4123-9DE8-ED15D31E0AA7}.Release|x86.ActiveCfg = Release|Win32
 		{0D2EB003-E5BC-4123-9DE8-ED15D31E0AA7}.Release|x86.Build.0 = Release|Win32
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Debug|x64.ActiveCfg = Debug|x64
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Debug|x64.Build.0 = Debug|x64
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Debug|x86.ActiveCfg = Debug|Win32
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Debug|x86.Build.0 = Debug|Win32
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Release|x64.ActiveCfg = Release|x64
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Release|x64.Build.0 = Release|x64
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Release|x86.ActiveCfg = Release|Win32
+		{DD37B304-ACEA-499E-A136-EF2FBBA97557}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
