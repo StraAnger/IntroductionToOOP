@@ -147,7 +147,7 @@ Binary operator&(Binary left, Binary right)
 	Binary result;
 	result.set_capacity(left.get_capacity());
 	for (int i = 0; i < result.get_capacity(); i++)
-		result.get_number()[i] = left.get_number()[i] || right.get_number()[i] ? 0 : 1;
+		result.get_number()[i] = left.get_number()[i] && right.get_number()[i] ? 1 : 0;
 	return result;
 }
 
@@ -191,7 +191,7 @@ Binary operator^(Binary left, Binary right)
 	Binary result;
 	result.set_capacity(left.get_capacity());
 	for (int i = 0; i < result.get_capacity(); i++)
-		result.get_number()[i] = left.get_number()[i] && right.get_number()[i] ? 0 : 1;
+		result.get_number()[i] = left.get_number()[i] ^ right.get_number()[i] ? 1 : 0;
 	return result;
 }
 
@@ -218,7 +218,13 @@ void main()
 
 	Binary bin1 = 202;
 	Binary bin2 = 27;
+	cout << bin1 << endl;
+	cout << bin2 << endl;
+
+	std::cout << "OR: \n";
 	cout << (bin1 | bin2) << endl;
+	std::cout << "AND: \n";
 	cout << (bin1 & bin2) << endl;
+	std::cout << "XOR: \n";
 	cout << (bin1 ^ bin2) << endl;
 }
