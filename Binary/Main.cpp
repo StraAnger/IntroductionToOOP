@@ -137,6 +137,20 @@ public:
 	}
 };
 
+Binary operator&(Binary left, Binary right)
+{
+
+	if (left.get_capacity() > right.get_capacity())
+		right.set_capacity(left.get_capacity());
+	else
+		left.set_capacity(right.get_capacity());
+	Binary result;
+	result.set_capacity(left.get_capacity());
+	for (int i = 0; i < result.get_capacity(); i++)
+		result.get_number()[i] = left.get_number()[i] || right.get_number()[i] ? 0 : 1;
+	return result;
+}
+
 Binary operator|(Binary left, Binary right)
 {
 	//Binary result;
@@ -167,6 +181,20 @@ Binary operator|(Binary left, Binary right)
 	return result;
 }
 
+Binary operator^(Binary left, Binary right)
+{
+
+	if (left.get_capacity() > right.get_capacity())
+		right.set_capacity(left.get_capacity());
+	else
+		left.set_capacity(right.get_capacity());
+	Binary result;
+	result.set_capacity(left.get_capacity());
+	for (int i = 0; i < result.get_capacity(); i++)
+		result.get_number()[i] = left.get_number()[i] && right.get_number()[i] ? 0 : 1;
+	return result;
+}
+
 std::ostream& operator<<(std::ostream& os, const Binary& obj)
 {
 	return obj.print(os);
@@ -191,4 +219,6 @@ void main()
 	Binary bin1 = 202;
 	Binary bin2 = 27;
 	cout << (bin1 | bin2) << endl;
+	cout << (bin1 & bin2) << endl;
+	cout << (bin1 ^ bin2) << endl;
 }
